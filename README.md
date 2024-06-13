@@ -71,7 +71,7 @@ For example, to build a Linux amd64 binary, run the following command in the
 repository directory:
 
 ```
-make build-linux-amd64
+make linux-amd64
 ```
 
 The binary will be located in the `bin` directory.
