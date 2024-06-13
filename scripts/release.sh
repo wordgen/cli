@@ -9,8 +9,14 @@ git push origin "$TAG"
 
 cd bin
 
-b2sum -- * > b2sums.txt
-gpg --local-user FBE12A89 --detach-sign --armor b2sums.txt
+BINS=(*)
+
+for bin in "${BINS[@]}"; do
+	sha512sum "$bin" > "$bin.sha512"
+	gpg --local-user FBE12A89 --detach-sign --armor "$bin.sha512"
+done
+
+cp ../LICENSE .
 
 FILES=(*)
 
