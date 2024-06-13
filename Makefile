@@ -1,0 +1,40 @@
+VERSION := v0.1.0
+PREFIX ?= /usr/local
+BINDIR ?= $(PREFIX)/bin
+SHAREDIR ?= $(PREFIX)/share
+
+build:
+	@go build -o bin/wordgen -trimpath -ldflags="-s -w -X main.version=$(VERSION) -buildid=" .
+
+run: build
+	@./bin/wordgen
+
+install:
+	@install -Dm755 bin/wordgen $(DESTDIR)$(BINDIR)/wordgen
+	@install -Dm644 LICENSE $(DESTDIR)$(SHAREDIR)/licenses/wordgen/LICENSE
+
+uninstall:
+	@rm -f $(DESTDIR)$(BINDIR)/wordgen
+	@rm -f $(DESTDIR)$(SHAREDIR)/licenses/wordgen/LICENSE
+
+clean:
+	@rm -f bin/*
+
+prune:
+	@docker system prune -a -f
+
+release: clean build-all prune
+	@./scripts/release.sh
+	@./scripts/update-aur.sh
+
+# Reproducible Builds (requires docker)
+build-all: build-linux-amd64 build-windows-amd64 build-darwin-amd64
+
+build-linux-amd64:
+	@./scripts/build.sh wordgen $(VERSION) linux amd64
+
+build-windows-amd64:
+	@./scripts/build.sh wordgen $(VERSION) windows amd64
+
+build-darwin-amd64:
+	@./scripts/build.sh wordgen $(VERSION) darwin amd64
