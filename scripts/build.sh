@@ -14,11 +14,9 @@ ARCH="$4"
 
 IMAGE_NAME="$BIN-$OS-$ARCH-image"
 CONTAINER_NAME="$BIN-$OS-$ARCH"
-OUTPUT_BIN="bin/$BIN"
+BINARY_NAME="$BIN-$OS-$ARCH"
 
-[[ "$OS" == "darwin" ]] && OUTPUT_BIN="$OUTPUT_BIN-macos"
-[[ "$ARCH" == "arm64" ]] && OUTPUT_BIN="$OUTPUT_BIN-arm64"
-[[ "$OS" == "windows" ]] && OUTPUT_BIN="$OUTPUT_BIN.exe"
+[[ "$OS" == "windows" ]] && BINARY_NAME="$BINARY_NAME.exe"
 
 mkdir -p bin
 
@@ -30,6 +28,6 @@ docker build -t "$IMAGE_NAME" \
              --no-cache .
 
 docker run --name "$CONTAINER_NAME" "$IMAGE_NAME"
-docker cp "$CONTAINER_NAME:/app/$BIN" "$OUTPUT_BIN"
+docker cp "$CONTAINER_NAME:/app/$BINARY_NAME" "bin"
 docker rm "$CONTAINER_NAME"
 docker image rm "$IMAGE_NAME"
