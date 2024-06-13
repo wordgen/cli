@@ -28,13 +28,16 @@ release: clean build-all prune
 	@./scripts/update-aur.sh
 
 # Reproducible Builds (requires docker)
-build-all: build-linux-amd64 build-windows-amd64 build-darwin-amd64
+build-all: linux-amd64 windows-amd64 darwin-amd64
 
-build-linux-amd64:
+linux-amd64:
 	@./scripts/build.sh wordgen $(VERSION) linux amd64
 
-build-windows-amd64:
+windows-amd64:
 	@./scripts/build.sh wordgen $(VERSION) windows amd64
 
-build-darwin-amd64:
+darwin-amd64:
 	@./scripts/build.sh wordgen $(VERSION) darwin amd64
+
+.PHONY: build run install uninstall clean prune release build-all \
+        linux-amd64 windows-amd64 darwin-amd64
