@@ -31,13 +31,13 @@ release: clean build-all prune
 build-all: linux-amd64 windows-amd64 darwin-amd64
 
 linux-amd64:
-	@./scripts/build.sh wordgen $(VERSION) linux amd64
+	@./scripts/build.sh linux amd64
 
 windows-amd64:
-	@./scripts/build.sh wordgen $(VERSION) windows amd64
+	@./scripts/build.sh windows amd64
 
 darwin-amd64:
-	@./scripts/build.sh wordgen $(VERSION) darwin amd64
+	@./scripts/build.sh darwin amd64
 
 .PHONY: build run install uninstall clean prune release build-all \
         linux-amd64 windows-amd64 darwin-amd64
