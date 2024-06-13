@@ -1,4 +1,4 @@
-# wordgen CLI
+# wordgen/cli
 
 A program that prints random words generated from the [EFF Large Wordlist].
 
