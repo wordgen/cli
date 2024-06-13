@@ -6,17 +6,11 @@ A program that prints random words generated from the [EFF Large Wordlist].
 
 ### AUR
 
-Use your preferred AUR helper to install `wordgen`.
+You can use your preferred AUR helper, or manually clone and run `makepkg`, to
+install `wordgen` or `wordgen-bin`.
 
-[![wordgen](https://img.shields.io/aur/version/wordgen?label=wordgen&logo=arch-linux&style=plastic)](https://aur.archlinux.org/packages/wordgen)
-
-Or clone and build:
-
-```
-git clone https://aur.archlinux.org/wordgen.git
-cd wordgen
-makepkg -si
-```
+[![wordgen][badge-url]][aur-url]
+[![wordgen-bin][badge-url-bin]][aur-url-bin]
 
 ### Non-AUR
 
@@ -97,6 +91,10 @@ License v3.0 or later - see the [LICENSE] file for details.
 
 <!-- links --->
 [EFF Large Wordlist]: https://www.eff.org/files/2016/07/18/eff_large_wordlist.txt
+[badge-url]: https://img.shields.io/aur/version/wordgen?label=wordgen&logo=arch-linux&style=plastic
+[aur-url]: https://aur.archlinux.org/packages/wordgen
+[badge-url-bin]: https://img.shields.io/aur/version/wordgen-bin?label=wordgen-bin&logo=arch-linux&style=plastic
+[aur-url-bin]: https://aur.archlinux.org/packages/wordgen-bin
 [release]: https://github.com/wordgen/cli/releases/latest
 [Dockerfile]: Dockerfile
 [Makefile]: Makefile
