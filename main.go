@@ -43,16 +43,11 @@ func main() {
 OPTIONS
   -c <STRING>  Specify the case of the words: upper, title, lower
                (default lower)
-
   -h           Display this help message and exit
-
   -n           Print words without a trailing newline
-
   -s <STRING>  Separate words with the specified string
                (default " ")
-
   -v           Print the version and exit
-
   -w <INT>     Number of words to print
                (default 1)
 
@@ -71,7 +66,12 @@ EXAMPLES
 		return
 	}
 
-	words, err := wordgen.WordGenerator(wordlists.EFFLarge, *wordCount, *wordCase, *wordSeparator)
+	g := wordgen.NewGenerator()
+	g.Words = wordlists.EFFLarge
+	g.Count = *wordCount
+	g.Casing = *wordCase
+	g.Separator = *wordSeparator
+	words, err := g.Generate()
 
 	if err != nil {
 		log.Fatalln(err)

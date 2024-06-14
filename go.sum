@@ -1,5 +1,5 @@
-github.com/wordgen/wordgen v0.1.0 h1:3aNVKfohOi8Y70pVACN2no2US+XU5x/DttQiRJIfFF4=
-github.com/wordgen/wordgen v0.1.0/go.mod h1:x90ETdoxrm7I7qhVxT8QJHoOgEv66YDen1fUadBNHiI=
+github.com/wordgen/wordgen v0.2.0 h1:53QtYscRBRINHJTWwc+LrovzHrBGgeRj1se9X3hIFHc=
+github.com/wordgen/wordgen v0.2.0/go.mod h1:x90ETdoxrm7I7qhVxT8QJHoOgEv66YDen1fUadBNHiI=
 github.com/wordgen/wordlists v0.1.0 h1:3Vqhbkv+k+jz/WxW4cusdSfDzOZcyl201SqmI38guCk=
 github.com/wordgen/wordlists v0.1.0/go.mod h1:geoB9+JZefcybbWAfATlkookTVrTkKlqEkqjWw+19NY=
 golang.org/x/text v0.16.0 h1:a94ExnEXNtEwYLGJSIUxnWoxoRz/ZcCsV63ROupILh4=
