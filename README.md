@@ -28,7 +28,7 @@ Clone the repository and run `make` inside the directory:
 
 ```
 git clone https://github.com/wordgen/cli.git
-cd wordgen
+cd cli
 make
 ```
 
