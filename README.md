@@ -89,7 +89,7 @@ Ensure your commit messages and pull request titles follow the
 All files in this repository are licensed under the GNU Affero General Public
 License v3.0 or later - see the [LICENSE] file for details.
 
-<!-- links --->
+<!-- links -->
 [EFF Large Wordlist]: https://www.eff.org/files/2016/07/18/eff_large_wordlist.txt
 [badge-url]: https://img.shields.io/aur/version/wordgen?label=wordgen&logo=arch-linux&style=plastic
 [aur-url]: https://aur.archlinux.org/packages/wordgen
