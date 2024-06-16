@@ -22,10 +22,12 @@ import (
 
 	"github.com/wordgen/wordlists/eff"
 	"github.com/wordgen/wordlists/names"
+	"golang.org/x/tools/godoc/util"
+	"golang.org/x/tools/godoc/vfs"
 )
 
 func getWordlist(wordlist string) ([]string, error) {
-	if isFile(wordlist) {
+	if isValidFile(wordlist) {
 		return readWordsFromFile(wordlist)
 	}
 
@@ -57,7 +59,6 @@ func readWordsFromFile(path string) ([]string, error) {
 	return strings.Split(strings.TrimSpace(string(fileContent)), "\n"), nil
 }
 
-func isFile(path string) bool {
-	fileInfo, err := os.Stat(path)
-	return err == nil && fileInfo.Mode().IsRegular()
+func isValidFile(path string) bool {
+	return util.IsTextFile(vfs.OS("."), path)
 }
