@@ -65,6 +65,8 @@ Ditch.Dealer.Flammable.Unearth.Yonder
 ## Wordlists
 
 The wordlists used in this program are from the [wordgen/wordlists repository].
+You can switch which wordlist the words are generated from with the `-l, --list`
+option. You can also use a local file with the option.
 
 ## Reproducible Builds
 
