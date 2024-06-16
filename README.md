@@ -1,6 +1,7 @@
 # wordgen/cli
 
-A program that prints random words generated from the [EFF Large Wordlist].
+A CLI program that prints random words. You can customize the word case,
+separator, number of words, and wordlist used.
 
 ## Installation
 
@@ -61,6 +62,10 @@ $ wordgen -w 5 -s . -c title
 Ditch.Dealer.Flammable.Unearth.Yonder
 ```
 
+## Wordlists
+
+The wordlists used in this program are from the [wordgen/wordlists repository].
+
 ## Reproducible Builds
 
 Each release binary is built using the [Dockerfile] and [Makefile]. This
@@ -90,7 +95,7 @@ All files in this repository are licensed under the GNU Affero General Public
 License v3.0 or later - see the [LICENSE] file for details.
 
 <!-- links -->
-[EFF Large Wordlist]: https://www.eff.org/files/2016/07/18/eff_large_wordlist.txt
+[wordgen/wordlists repository]: https://github.com/wordgen/wordlists
 [badge-url]: https://img.shields.io/aur/version/wordgen?label=wordgen&logo=arch-linux&style=plastic
 [aur-url]: https://aur.archlinux.org/packages/wordgen
 [badge-url-bin]: https://img.shields.io/aur/version/wordgen-bin?label=wordgen-bin&logo=arch-linux&style=plastic
