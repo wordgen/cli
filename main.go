@@ -22,6 +22,7 @@ import (
 
 	"github.com/wordgen/wordgen"
 	"github.com/wordgen/wordlists/eff"
+	"github.com/wordgen/wordlists/names"
 )
 
 var version = "dev"
@@ -31,10 +32,18 @@ const usage = `Usage: wordgen [options]
 Options:
   -c, --case STRING         Specify the case of the words: upper, title, lower
   -h, --help                Display this help message and exit
+  -l, --list                Specify the wordlist to use
   -n, --no-newline          Print words without a trailing newline
   -s, --separator STRING    Separate words with the specified string
   -v, --version             Print the version and exit
   -w, --words INT           Number of words to print
+
+Wordlists:
+  effLarge     namesMixed
+  effShort1    namesFemale
+  effShort2    namesMale
+
+  effLarge is the default wordlist
 
 Examples:
   wordgen
@@ -46,8 +55,10 @@ func main() {
 		wordCase            string
 		wordCount           int
 		wordSeparator       string
+		selectedWordList    string
 		printVersion        bool
 		printWithoutNewline bool
+		wordlist            []string
 	)
 
 	flag.StringVar(&wordCase, "c", "", "")
@@ -56,6 +67,8 @@ func main() {
 	flag.IntVar(&wordCount, "words", 1, "")
 	flag.StringVar(&wordSeparator, "s", " ", "")
 	flag.StringVar(&wordSeparator, "separator", " ", "")
+	flag.StringVar(&selectedWordList, "l", "effLarge", "")
+	flag.StringVar(&selectedWordList, "list", "effLarge", "")
 	flag.BoolVar(&printVersion, "v", false, "")
 	flag.BoolVar(&printVersion, "version", false, "")
 	flag.BoolVar(&printWithoutNewline, "n", false, "")
@@ -68,8 +81,25 @@ func main() {
 		return
 	}
 
+	switch selectedWordList {
+	case "effLarge":
+		wordlist = eff.Large
+	case "effShort1":
+		wordlist = eff.Short1
+	case "effShort2":
+		wordlist = eff.Short2
+	case "namesMixed":
+		wordlist = names.Mixed
+	case "namesFemale":
+		wordlist = names.Female
+	case "namesMale":
+		wordlist = names.Male
+	default:
+		log.Fatalln("ERROR: invalid wordlist:", selectedWordList)
+	}
+
 	g := wordgen.NewGenerator()
-	g.Words = eff.Large
+	g.Words = wordlist
 	g.Count = wordCount
 	g.Casing = wordCase
 	g.Separator = wordSeparator
