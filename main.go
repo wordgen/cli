@@ -26,58 +26,60 @@ import (
 
 var version = "dev"
 
-func main() {
-	var (
-		wordCase            = flag.String("c", "lower", "")
-		wordCount           = flag.Int("w", 1, "")
-		wordSeparator       = flag.String("s", " ", "")
-		printVersion        = flag.Bool("v", false, "")
-		printWithoutNewline = flag.Bool("n", false, "")
-	)
+const usage = `Usage: wordgen [options]
 
-	flag.Usage = func() {
-		s := `USAGE
-  wordgen
-  wordgen [OPTIONS]
+Options:
+  -c, --case STRING         Specify the case of the words: upper, title, lower
+  -h, --help                Display this help message and exit
+  -n, --no-newline          Print words without a trailing newline
+  -s, --separator STRING    Separate words with the specified string
+  -v, --version             Print the version and exit
+  -w, --words INT           Number of words to print
 
-OPTIONS
-  -c <STRING>  Specify the case of the words: upper, title, lower
-               (default lower)
-  -h           Display this help message and exit
-  -n           Print words without a trailing newline
-  -s <STRING>  Separate words with the specified string
-               (default " ")
-  -v           Print the version and exit
-  -w <INT>     Number of words to print
-               (default 1)
-
-EXAMPLES
+Examples:
   wordgen
   wordgen -w 10
   wordgen -w 10 -s . -c title`
 
-		fmt.Println(s)
-	}
+func main() {
+	var (
+		wordCase            string
+		wordCount           int
+		wordSeparator       string
+		printVersion        bool
+		printWithoutNewline bool
+	)
 
+	flag.StringVar(&wordCase, "c", "", "")
+	flag.StringVar(&wordCase, "case", "", "")
+	flag.IntVar(&wordCount, "w", 1, "")
+	flag.IntVar(&wordCount, "words", 1, "")
+	flag.StringVar(&wordSeparator, "s", " ", "")
+	flag.StringVar(&wordSeparator, "separator", " ", "")
+	flag.BoolVar(&printVersion, "v", false, "")
+	flag.BoolVar(&printVersion, "version", false, "")
+	flag.BoolVar(&printWithoutNewline, "n", false, "")
+	flag.BoolVar(&printWithoutNewline, "no-newline", false, "")
+	flag.Usage = func() { fmt.Println(usage) }
 	flag.Parse()
 
-	if *printVersion {
+	if printVersion {
 		fmt.Printf("wordgen %s\n", version)
 		return
 	}
 
 	g := wordgen.NewGenerator()
 	g.Words = eff.Large
-	g.Count = *wordCount
-	g.Casing = *wordCase
-	g.Separator = *wordSeparator
+	g.Count = wordCount
+	g.Casing = wordCase
+	g.Separator = wordSeparator
 	words, err := g.Generate()
 
 	if err != nil {
 		log.Fatalln(err)
 	}
 
-	if *printWithoutNewline {
+	if printWithoutNewline {
 		fmt.Print(words)
 	} else {
 		fmt.Println(words)
