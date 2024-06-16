@@ -1,6 +1,6 @@
 github.com/wordgen/wordgen v0.2.0 h1:53QtYscRBRINHJTWwc+LrovzHrBGgeRj1se9X3hIFHc=
 github.com/wordgen/wordgen v0.2.0/go.mod h1:x90ETdoxrm7I7qhVxT8QJHoOgEv66YDen1fUadBNHiI=
-github.com/wordgen/wordlists v0.1.0 h1:3Vqhbkv+k+jz/WxW4cusdSfDzOZcyl201SqmI38guCk=
-github.com/wordgen/wordlists v0.1.0/go.mod h1:geoB9+JZefcybbWAfATlkookTVrTkKlqEkqjWw+19NY=
+github.com/wordgen/wordlists/eff v0.1.0 h1:0uprYS8kGaeAbRLPL1+ibmOPW783X9fgt4R6sXzQ+Ew=
+github.com/wordgen/wordlists/eff v0.1.0/go.mod h1:hsLXGcWdZhzUQ9QXCMrXHl4euoclcCadzhQe2ERLL6w=
 golang.org/x/text v0.16.0 h1:a94ExnEXNtEwYLGJSIUxnWoxoRz/ZcCsV63ROupILh4=
 golang.org/x/text v0.16.0/go.mod h1:GhwF1Be+LQoKShO3cGOHzqOgRrGaYc9AvblQOmPVHnI=

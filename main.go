@@ -21,7 +21,7 @@ import (
 	"log"
 
 	"github.com/wordgen/wordgen"
-	"github.com/wordgen/wordlists"
+	"github.com/wordgen/wordlists/eff"
 )
 
 var version = "dev"
@@ -67,7 +67,7 @@ EXAMPLES
 	}
 
 	g := wordgen.NewGenerator()
-	g.Words = wordlists.EFFLarge
+	g.Words = eff.Large
 	g.Count = *wordCount
 	g.Casing = *wordCase
 	g.Separator = *wordSeparator
