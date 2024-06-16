@@ -23,7 +23,10 @@ clean:
 prune:
 	@docker system prune -a -f
 
-release: clean build-all prune
+test:
+	@go test -v ./...
+
+release: clean test build-all prune
 	@./scripts/release.sh
 	@./scripts/update-aur.sh
 
@@ -39,5 +42,5 @@ windows-amd64:
 darwin-amd64:
 	@./scripts/build.sh darwin amd64
 
-.PHONY: build run install uninstall clean prune release build-all \
+.PHONY: build run install uninstall clean prune test release build-all \
         linux-amd64 windows-amd64 darwin-amd64
