@@ -4,8 +4,6 @@ ARG OS
 ARG ARCH
 ARG VERSION
 
-RUN apt-get update && apt-get install -y zip
-
 WORKDIR /app
 
 COPY go.mod go.sum ./
@@ -23,6 +21,7 @@ RUN OUTPUT_BIN="wordgen"; \
     GOOS=$OS GOARCH=$ARCH go build -o "$OUTPUT_BIN" -trimpath -ldflags="-s -w -X main.version=$VERSION -buildid=" . && \
     ARCHIVE_NAME="wordgen-$VERSION-$OS-$ARCH"; \
     if [ "$OS" = "windows" ]; then \
+        apt-get update && apt-get install -y zip; \
         zip -9 "/out/$ARCHIVE_NAME.zip" "LICENSE" "$OUTPUT_BIN"; \
     else \
         tar -cf "/out/$ARCHIVE_NAME.tar.gz" -I "gzip -9" "LICENSE" "$OUTPUT_BIN"; \
