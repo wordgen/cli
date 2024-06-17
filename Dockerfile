@@ -7,7 +7,7 @@ ARG VERSION
 WORKDIR /app
 
 COPY go.mod go.sum ./
-COPY main.go ./
+COPY main.go flags.go util.go ./
 
 RUN go mod tidy
 
