@@ -15,12 +15,18 @@
 
 package main
 
+import (
+	"flag"
+	"fmt"
+)
+
 const usage = `Usage: wordgen [options]
 
 Options:
   -c, --case STRING         Specify the case of the words (upper, title, lower)
+  -f, --file PATH           Specify a file to use as the wordlist
   -h, --help                Display this help message and exit
-  -l, --list STRING         Specify the wordlist to use (can be a file)
+  -l, --list STRING         Specify the wordlist to use
   -n, --no-newline          Print words without a trailing newline
   -s, --separator STRING    Separate words with the specified string
   -v, --version             Print the version and exit
@@ -32,3 +38,36 @@ Wordlists:
   effShort2    namesMale
 
   effLarge is the default wordlist`
+
+type Config struct {
+	wordCase            string
+	wordCount           int
+	wordSeparator       string
+	selectedWordlist    string
+	wordlistPath        string
+	printVersion        bool
+	printWithoutNewline bool
+}
+
+func parseFlags() Config {
+	config := Config{}
+
+	flag.StringVar(&config.wordCase, "c", "", "")
+	flag.StringVar(&config.wordCase, "case", "", "")
+	flag.IntVar(&config.wordCount, "w", 1, "")
+	flag.IntVar(&config.wordCount, "words", 1, "")
+	flag.StringVar(&config.wordSeparator, "s", " ", "")
+	flag.StringVar(&config.wordSeparator, "separator", " ", "")
+	flag.StringVar(&config.selectedWordlist, "l", "effLarge", "")
+	flag.StringVar(&config.selectedWordlist, "list", "effLarge", "")
+	flag.StringVar(&config.wordlistPath, "f", "", "")
+	flag.StringVar(&config.wordlistPath, "file", "", "")
+	flag.BoolVar(&config.printVersion, "v", false, "")
+	flag.BoolVar(&config.printVersion, "version", false, "")
+	flag.BoolVar(&config.printWithoutNewline, "n", false, "")
+	flag.BoolVar(&config.printWithoutNewline, "no-newline", false, "")
+	flag.Usage = func() { fmt.Println(usage) }
+	flag.Parse()
+
+	return config
+}

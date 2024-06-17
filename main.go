@@ -16,7 +16,6 @@
 package main
 
 import (
-	"flag"
 	"fmt"
 	"log"
 
@@ -26,36 +25,14 @@ import (
 var version = "dev"
 
 func main() {
-	var (
-		wordCase            string
-		wordCount           int
-		wordSeparator       string
-		selectedWordlist    string
-		printVersion        bool
-		printWithoutNewline bool
-	)
+	config := parseFlags()
 
-	flag.StringVar(&wordCase, "c", "", "")
-	flag.StringVar(&wordCase, "case", "", "")
-	flag.IntVar(&wordCount, "w", 1, "")
-	flag.IntVar(&wordCount, "words", 1, "")
-	flag.StringVar(&wordSeparator, "s", " ", "")
-	flag.StringVar(&wordSeparator, "separator", " ", "")
-	flag.StringVar(&selectedWordlist, "l", "effLarge", "")
-	flag.StringVar(&selectedWordlist, "list", "effLarge", "")
-	flag.BoolVar(&printVersion, "v", false, "")
-	flag.BoolVar(&printVersion, "version", false, "")
-	flag.BoolVar(&printWithoutNewline, "n", false, "")
-	flag.BoolVar(&printWithoutNewline, "no-newline", false, "")
-	flag.Usage = func() { fmt.Println(usage) }
-	flag.Parse()
-
-	if printVersion {
+	if config.printVersion {
 		fmt.Println("wordgen", version)
 		return
 	}
 
-	wordlist, err := getWordlist(selectedWordlist)
+	wordlist, err := setWordlist(config)
 
 	if err != nil {
 		log.Fatalln("ERROR:", err)
@@ -63,16 +40,16 @@ func main() {
 
 	g := wordgen.NewGenerator()
 	g.Words = wordlist
-	g.Count = wordCount
-	g.Casing = wordCase
-	g.Separator = wordSeparator
+	g.Count = config.wordCount
+	g.Casing = config.wordCase
+	g.Separator = config.wordSeparator
 	words, err := g.Generate()
 
 	if err != nil {
 		log.Fatalln("ERROR:", err)
 	}
 
-	if printWithoutNewline {
+	if config.printWithoutNewline {
 		fmt.Print(words)
 	} else {
 		fmt.Println(words)

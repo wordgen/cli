@@ -26,12 +26,12 @@ import (
 	"golang.org/x/tools/godoc/vfs"
 )
 
-func getWordlist(wordlist string) ([]string, error) {
-	if isValidFile(wordlist) {
-		return readWordsFromFile(wordlist)
+func setWordlist(c Config) ([]string, error) {
+	if c.wordlistPath != "" {
+		return readWordsFromFile(c)
 	}
 
-	switch wordlist {
+	switch c.selectedWordlist {
 	case "effLarge":
 		return eff.Large, nil
 	case "effShort1":
@@ -45,20 +45,20 @@ func getWordlist(wordlist string) ([]string, error) {
 	case "namesMale":
 		return names.Male, nil
 	default:
-		return []string{}, fmt.Errorf("invalid wordlist: %s", wordlist)
+		return []string{}, fmt.Errorf("invalid wordlist: %s", c.selectedWordlist)
 	}
 }
 
-func readWordsFromFile(path string) ([]string, error) {
-	fileContent, err := os.ReadFile(path)
+func readWordsFromFile(c Config) ([]string, error) {
+	if !util.IsTextFile(vfs.OS("."), c.wordlistPath) {
+		return []string{}, fmt.Errorf("invalid file path: %s", c.wordlistPath)
+	}
+
+	fileContent, err := os.ReadFile(c.wordlistPath)
 
 	if err != nil {
 		return []string{}, fmt.Errorf("failed to read file: %v", err)
 	}
 
 	return strings.Split(strings.TrimSpace(string(fileContent)), "\n"), nil
-}
-
-func isValidFile(path string) bool {
-	return util.IsTextFile(vfs.OS("."), path)
 }
