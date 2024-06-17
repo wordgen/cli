@@ -24,8 +24,8 @@ prune:
 	@docker system prune -a -f
 
 release: clean build-all prune
-	@./scripts/release.sh
-	@./scripts/update-aur.sh
+	@./release.sh
+	@./update-aur.sh
 
 # Reproducible Builds (requires docker)
 build-all: linux-amd64 linux-arm64 \
@@ -33,22 +33,22 @@ build-all: linux-amd64 linux-arm64 \
            darwin-amd64 darwin-arm64
 
 linux-amd64:
-	@./scripts/build.sh linux amd64
+	@./build.sh linux amd64
 
 linux-arm64:
-	@./scripts/build.sh linux arm64
+	@./build.sh linux arm64
 
 windows-amd64:
-	@./scripts/build.sh windows amd64
+	@./build.sh windows amd64
 
 windows-arm64:
-	@./scripts/build.sh windows arm64
+	@./build.sh windows arm64
 
 darwin-amd64:
-	@./scripts/build.sh darwin amd64
+	@./build.sh darwin amd64
 
 darwin-arm64:
-	@./scripts/build.sh darwin arm64
+	@./build.sh darwin arm64
 
 .PHONY: build run install uninstall clean prune release build-all \
         linux-amd64 linux-arm64 \
