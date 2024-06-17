@@ -51,7 +51,7 @@ func setWordlist(c Config) ([]string, error) {
 
 func readWordsFromFile(c Config) ([]string, error) {
 	if !util.IsTextFile(vfs.OS("."), c.wordlistPath) {
-		return []string{}, fmt.Errorf("invalid file path: %s", c.wordlistPath)
+		return []string{}, fmt.Errorf("file does not contain text or does not exist: %s", c.wordlistPath)
 	}
 
 	fileContent, err := os.ReadFile(c.wordlistPath)
