@@ -18,12 +18,12 @@ package main
 import (
 	"fmt"
 	"os"
+	"path/filepath"
 	"strings"
 
+	"github.com/gabriel-vasile/mimetype"
 	"github.com/wordgen/wordlists/eff"
 	"github.com/wordgen/wordlists/names"
-	"golang.org/x/tools/godoc/util"
-	"golang.org/x/tools/godoc/vfs"
 )
 
 func setWordlist(c Config) ([]string, error) {
@@ -45,19 +45,28 @@ func setWordlist(c Config) ([]string, error) {
 	case "namesMale":
 		return names.Male, nil
 	default:
-		return []string{}, fmt.Errorf("invalid wordlist: %s", c.selectedWordlist)
+		return nil, fmt.Errorf("invalid wordlist: %s", c.selectedWordlist)
 	}
 }
 
 func readWordsFromFile(c Config) ([]string, error) {
-	if !util.IsTextFile(vfs.OS("."), c.wordlistPath) {
-		return []string{}, fmt.Errorf("file does not contain text or does not exist: %s", c.wordlistPath)
+	absPath, err := filepath.Abs(c.wordlistPath)
+	if err != nil {
+		return nil, fmt.Errorf("failed to get absolute path: %v", err)
 	}
 
-	fileContent, err := os.ReadFile(c.wordlistPath)
-
+	mtype, err := mimetype.DetectFile(absPath)
 	if err != nil {
-		return []string{}, fmt.Errorf("failed to read file: %v", err)
+		return nil, fmt.Errorf("failed to detect file type: %v", err)
+	}
+
+	if !mtype.Is("text/plain") {
+		return nil, fmt.Errorf("not a text file: %s", mtype.String())
+	}
+
+	fileContent, err := os.ReadFile(absPath)
+	if err != nil {
+		return nil, fmt.Errorf("failed to read file: %v", err)
 	}
 
 	return strings.Split(strings.TrimSpace(string(fileContent)), "\n"), nil
