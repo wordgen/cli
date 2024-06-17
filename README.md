@@ -64,9 +64,12 @@ Ditch.Dealer.Flammable.Unearth.Yonder
 
 ## Wordlists
 
-The wordlists used in this program are from the [wordgen/wordlists repository].
+The wordlists used in this program are from the [wordgen/wordlists] repository.
 You can switch which wordlist the words are generated from with the `-l, --list`
-option. You can also use a local file with the option.
+option.
+
+You can also use a local wordlist file with the `-f, --file` option. The file
+must be a text file with one word per line.
 
 ## Reproducible Builds
 
@@ -97,7 +100,7 @@ All files in this repository are licensed under the GNU Affero General Public
 License v3.0 or later - see the [LICENSE] file for details.
 
 <!-- links -->
-[wordgen/wordlists repository]: https://github.com/wordgen/wordlists
+[wordgen/wordlists]: https://github.com/wordgen/wordlists
 [badge-url]: https://img.shields.io/aur/version/wordgen?label=wordgen&logo=arch-linux&style=plastic
 [aur-url]: https://aur.archlinux.org/packages/wordgen
 [badge-url-bin]: https://img.shields.io/aur/version/wordgen-bin?label=wordgen-bin&logo=arch-linux&style=plastic
