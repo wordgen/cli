@@ -70,9 +70,8 @@ option. You can also use a local file with the option.
 
 ## Reproducible Builds
 
-Each release binary is built using the [Dockerfile] and [Makefile]. This
-enables you to easily verify the release binaries by building one yourself and
-comparing the checksums.
+Each release binary is built using the [Dockerfile] and [Makefile]. This enables
+you to easily verify them by building one yourself and comparing the checksums.
 
 For example, to build a Linux amd64 binary, run the following command in the
 repository directory:
@@ -81,7 +80,8 @@ repository directory:
 make linux-amd64
 ```
 
-The binary will be located in the `bin` directory.
+The resulting binary will be located in the `bin` directory, compressed into an
+archive for distribution.
 
 ## Contributing
 
