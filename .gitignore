@@ -1,1 +1,3 @@
 bin
+release.sh
+update-aur.sh
