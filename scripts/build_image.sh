@@ -9,8 +9,6 @@ fi
 
 OS="$1"
 ARCH="$2"
-
-VERSION="$(grep -E '^VERSION[[:space:]]*:=[[:space:]]*' ./Makefile | awk '{print $3}')"
 IMAGE_NAME="wordgen-$OS-$ARCH-image"
 CONTAINER_NAME="wordgen-$OS-$ARCH"
 
@@ -19,7 +17,6 @@ mkdir -p ./bin
 docker build -t "$IMAGE_NAME" \
              --build-arg "OS=$OS" \
              --build-arg "ARCH=$ARCH" \
-             --build-arg "VERSION=$VERSION" \
              --no-cache .
 
 docker run --name "$CONTAINER_NAME" "$IMAGE_NAME"
