@@ -1,10 +1,9 @@
-VERSION := v0.4.0
 PREFIX ?= /usr/local
 BINDIR ?= $(PREFIX)/bin
 SHAREDIR ?= $(PREFIX)/share
 
 build:
-	@go build -o ./bin/wordgen -trimpath -ldflags="-s -w -X main.version=$(VERSION) -buildid=" .
+	@go build -o ./bin/wordgen -trimpath -ldflags="-s -w -buildid=" .
 
 run: build
 	@./bin/wordgen
@@ -18,14 +17,14 @@ uninstall:
 	@rm -rf $(DESTDIR)$(SHAREDIR)/licenses/wordgen
 
 clean:
-	@rm -f ./bin/*
+	@rm -rf ./bin/*
 
 prune:
 	@docker system prune -a -f
 
 release: clean build-all prune
-	@./release.sh
-	@./update-aur.sh
+	@./.local/release.sh
+	@./.local/update-aur.sh
 
 # Reproducible Builds (requires docker)
 build-all: linux-amd64 linux-arm64 \
@@ -33,22 +32,22 @@ build-all: linux-amd64 linux-arm64 \
            darwin-amd64 darwin-arm64
 
 linux-amd64:
-	@./build.sh linux amd64
+	@./scripts/build_image.sh linux amd64
 
 linux-arm64:
-	@./build.sh linux arm64
+	@./scripts/build_image.sh linux arm64
 
 windows-amd64:
-	@./build.sh windows amd64
+	@./scripts/build_image.sh windows amd64
 
 windows-arm64:
-	@./build.sh windows arm64
+	@./scripts/build_image.sh windows arm64
 
 darwin-amd64:
-	@./build.sh darwin amd64
+	@./scripts/build_image.sh darwin amd64
 
 darwin-arm64:
-	@./build.sh darwin arm64
+	@./scripts/build_image.sh darwin arm64
 
 .PHONY: build run install uninstall clean prune release build-all \
         linux-amd64 linux-arm64 \
