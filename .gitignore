@@ -1,3 +1,2 @@
-bin
-release.sh
-update-aur.sh
+.local/
+bin/
