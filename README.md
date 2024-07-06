@@ -100,7 +100,7 @@ All files in this repository are licensed under the GNU Affero General Public
 License v3.0 or later - see the [LICENSE] file for details.
 
 <!-- links -->
-[wordgen/wordlists]: https://github.com/wordgen/wordlists
+[wordgen/wordlists]: https://github.com/wordgen/wordlists/blob/main/README.md#available-wordlists
 [badge-url]: https://img.shields.io/aur/version/wordgen?label=wordgen&logo=arch-linux&style=plastic
 [aur-url]: https://aur.archlinux.org/packages/wordgen
 [badge-url-bin]: https://img.shields.io/aur/version/wordgen-bin?label=wordgen-bin&logo=arch-linux&style=plastic
