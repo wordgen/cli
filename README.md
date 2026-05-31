@@ -15,6 +15,16 @@ install `wordgen` or `wordgen-bin`.
 
 ### Non-AUR
 
+#### Go Install
+
+If you have Go installed, install the latest version with:
+
+```sh
+go install github.com/wordgen/cli/cmd/wordgen@latest
+```
+
+Ensure your Go binary directory is in your `PATH`.
+
 #### Release Binary
 
 Each [release] contains several binaries. Download the binary for your
@@ -27,7 +37,7 @@ installed: `git go make`
 
 Clone the repository and run `make` inside the directory:
 
-```
+```sh
 git clone https://github.com/wordgen/cli.git
 cd cli
 make
@@ -35,13 +45,13 @@ make
 
 Then run `make install` with root privileges to install:
 
-```
+```sh
 sudo make install
 ```
 
 To uninstall:
 
-```
+```sh
 sudo make uninstall
 ```
 
@@ -71,21 +81,6 @@ option.
 You can also use a local wordlist file with the `-f, --file` option. The file
 must be a text file with one word per line.
 
-## Reproducible Builds
-
-Each release binary is built using the [Dockerfile] and [Makefile]. This enables
-you to easily verify them by building one yourself and comparing the checksums.
-
-For example, to build a Linux amd64 binary, run the following command in the
-repository directory:
-
-```
-make linux-amd64
-```
-
-The resulting binary will be located in the `bin` directory, compressed into an
-archive for distribution.
-
 ## Contributing
 
 When submitting a pull request, please ensure they are directed to the `dev`
@@ -106,7 +101,5 @@ License v3.0 or later - see the [LICENSE] file for details.
 [badge-url-bin]: https://img.shields.io/aur/version/wordgen-bin?label=wordgen-bin&logo=arch-linux&style=plastic
 [aur-url-bin]: https://aur.archlinux.org/packages/wordgen-bin
 [release]: https://github.com/wordgen/cli/releases/latest
-[Dockerfile]: Dockerfile
-[Makefile]: Makefile
 [Conventional Commits]: https://conventionalcommits.org
 [LICENSE]: LICENSE
