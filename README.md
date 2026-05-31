@@ -30,6 +30,13 @@ Ensure your Go binary directory is in your `PATH`.
 Each [release] contains several binaries. Download the binary for your
 operating system, then put it in your `PATH`.
 
+The release also includes a `SHA512SUMS` file and its detached signature,
+`SHA512SUMS.asc`. The signature is created with the wordgen signing key:
+
+```text
+070559FD6C2A19F3
+```
+
 #### Build From Source
 
 If you wish to build the binary from source, you will need a few things
