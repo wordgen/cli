@@ -60,27 +60,31 @@ type Config struct {
 	printWithoutNewline bool
 }
 
-func parseFlags() *Config {
+func parseFlags(args []string) (*Config, error) {
 	c := &Config{}
+	fs := flag.NewFlagSet("wordgen", flag.ContinueOnError)
 
-	flag.StringVar(&c.wordCase, "c", "", "")
-	flag.StringVar(&c.wordCase, "case", "", "")
-	flag.IntVar(&c.wordCount, "w", 1, "")
-	flag.IntVar(&c.wordCount, "words", 1, "")
-	flag.StringVar(&c.wordSeparator, "s", " ", "")
-	flag.StringVar(&c.wordSeparator, "separator", " ", "")
-	flag.StringVar(&c.selectedWordlist, "l", "effLarge", "")
-	flag.StringVar(&c.selectedWordlist, "list", "effLarge", "")
-	flag.StringVar(&c.wordlistPath, "f", "", "")
-	flag.StringVar(&c.wordlistPath, "file", "", "")
-	flag.BoolVar(&c.printVersion, "v", false, "")
-	flag.BoolVar(&c.printVersion, "version", false, "")
-	flag.BoolVar(&c.printWithoutNewline, "n", false, "")
-	flag.BoolVar(&c.printWithoutNewline, "no-newline", false, "")
-	flag.Usage = func() { fmt.Println(usage) }
-	flag.Parse()
+	fs.StringVar(&c.wordCase, "c", "", "")
+	fs.StringVar(&c.wordCase, "case", "", "")
+	fs.IntVar(&c.wordCount, "w", 1, "")
+	fs.IntVar(&c.wordCount, "words", 1, "")
+	fs.StringVar(&c.wordSeparator, "s", " ", "")
+	fs.StringVar(&c.wordSeparator, "separator", " ", "")
+	fs.StringVar(&c.selectedWordlist, "l", "effLarge", "")
+	fs.StringVar(&c.selectedWordlist, "list", "effLarge", "")
+	fs.StringVar(&c.wordlistPath, "f", "", "")
+	fs.StringVar(&c.wordlistPath, "file", "", "")
+	fs.BoolVar(&c.printVersion, "v", false, "")
+	fs.BoolVar(&c.printVersion, "version", false, "")
+	fs.BoolVar(&c.printWithoutNewline, "n", false, "")
+	fs.BoolVar(&c.printWithoutNewline, "no-newline", false, "")
+	fs.Usage = func() { fmt.Println(usage) }
 
-	return c
+	if err := fs.Parse(args); err != nil {
+		return nil, err
+	}
+
+	return c, nil
 }
 
 func setWordlist(c *Config) ([]string, error) {
@@ -130,7 +134,13 @@ func readWordsFromFile(c *Config) ([]string, error) {
 }
 
 func main() {
-	c := parseFlags()
+	c, err := parseFlags(os.Args[1:])
+	if err != nil {
+		if err == flag.ErrHelp {
+			return
+		}
+		os.Exit(1)
+	}
 
 	if c.printVersion {
 		fmt.Println("wordgen", version)
