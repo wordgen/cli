@@ -8,7 +8,7 @@ BIN ?= wordgen
 .PHONY: build run install uninstall clean
 
 build:
-	go build -o ./bin/$(BIN) -trimpath -ldflags="-s -w -buildid=" ./cmd/wordgen
+	go build -o ./bin/$(BIN) ./cmd/wordgen
 
 run: build
 	./bin/$(BIN)
