@@ -13,11 +13,11 @@ func TestParseFlags(t *testing.T) {
 	tests := []struct {
 		name string
 		args []string
-		want *Config
+		want *config
 	}{
 		{
 			name: "defaults",
-			want: &Config{
+			want: &config{
 				wordCase:            "",
 				wordCount:           1,
 				wordSeparator:       " ",
@@ -38,7 +38,7 @@ func TestParseFlags(t *testing.T) {
 				"-v",
 				"-n",
 			},
-			want: &Config{
+			want: &config{
 				wordCase:            "upper",
 				wordCount:           3,
 				wordSeparator:       ":",
@@ -59,7 +59,7 @@ func TestParseFlags(t *testing.T) {
 				"--version",
 				"--no-newline",
 			},
-			want: &Config{
+			want: &config{
 				wordCase:            "lower",
 				wordCount:           5,
 				wordSeparator:       ",",
@@ -131,7 +131,7 @@ func TestSetWordlist(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got, err := setWordlist(&Config{
+			got, err := setWordlist(&config{
 				selectedWordlist: tt.selected,
 			})
 
@@ -160,7 +160,7 @@ func TestReadWordsFromFile(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	got, err := readWordsFromFile(&Config{
+	got, err := readWordsFromFile(&config{
 		wordlistPath: path,
 	})
 	if err != nil {

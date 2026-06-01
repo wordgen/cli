@@ -50,7 +50,7 @@ Wordlists:
   effLarge is the default wordlist`
 )
 
-type Config struct {
+type config struct {
 	wordCase            string
 	wordCount           int
 	wordSeparator       string
@@ -60,8 +60,8 @@ type Config struct {
 	printWithoutNewline bool
 }
 
-func parseFlags(args []string) (*Config, error) {
-	c := &Config{}
+func parseFlags(args []string) (*config, error) {
+	c := &config{}
 	fs := flag.NewFlagSet("wordgen", flag.ContinueOnError)
 
 	fs.StringVar(&c.wordCase, "c", "", "")
@@ -87,7 +87,7 @@ func parseFlags(args []string) (*Config, error) {
 	return c, nil
 }
 
-func setWordlist(c *Config) ([]string, error) {
+func setWordlist(c *config) ([]string, error) {
 	if c.wordlistPath != "" {
 		return readWordsFromFile(c)
 	}
@@ -110,7 +110,7 @@ func setWordlist(c *Config) ([]string, error) {
 	}
 }
 
-func readWordsFromFile(c *Config) ([]string, error) {
+func readWordsFromFile(c *config) ([]string, error) {
 	absPath, err := filepath.Abs(c.wordlistPath)
 	if err != nil {
 		return nil, fmt.Errorf("failed to get absolute path: %v", err)
