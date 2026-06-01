@@ -139,7 +139,7 @@ func main() {
 		if err == flag.ErrHelp {
 			return
 		}
-		os.Exit(1)
+		os.Exit(2)
 	}
 
 	if c.printVersion {
