@@ -1,0 +1,12 @@
+repos:
+  - repo: https://github.com/tekwizely/pre-commit-golang
+    rev: v1.0.0-rc.4
+    hooks:
+      - id: go-imports
+        args: [-w]
+
+      - id: go-mod-tidy
+      - id: go-test-mod
+      - id: go-vet-mod
+      - id: go-staticcheck-mod
+      - id: go-sec-mod
