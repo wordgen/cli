@@ -125,7 +125,7 @@ func readWordsFromFile(c *config) ([]string, error) {
 		return nil, fmt.Errorf("not a text file: %s", mtype.String())
 	}
 
-	fileContent, err := os.ReadFile(absPath)
+	fileContent, err := os.ReadFile(absPath) // #nosec G304 -- The --file option intentionally accepts an arbitrary user-selected local path.
 	if err != nil {
 		return nil, fmt.Errorf("failed to read file: %v", err)
 	}
