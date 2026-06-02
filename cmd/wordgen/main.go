@@ -21,6 +21,7 @@ import (
 	"log"
 	"os"
 	"path/filepath"
+	"runtime/debug"
 	"strings"
 
 	"github.com/gabriel-vasile/mimetype"
@@ -57,6 +58,19 @@ type config struct {
 	wordlistPath        string
 	printVersion        bool
 	printWithoutNewline bool
+}
+
+func buildVersion() string {
+	if version != "dev" {
+		return version
+	}
+
+	info, ok := debug.ReadBuildInfo()
+	if !ok || info.Main.Version == "" || info.Main.Version == "(devel)" {
+		return version
+	}
+
+	return info.Main.Version
 }
 
 func parseFlags(args []string) (*config, error) {
@@ -142,7 +156,7 @@ func main() {
 	}
 
 	if c.printVersion {
-		fmt.Println("wordgen", version)
+		fmt.Println("wordgen", buildVersion())
 		return
 	}
 
