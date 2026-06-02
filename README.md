@@ -39,27 +39,22 @@ The release also includes a `SHA512SUMS` file and its detached signature,
 
 #### Build From Source
 
-If you wish to build the binary from source, you will need a few things
-installed: `git go make`
+To build from source, install `git`, `go`, and `make`.
 
-Clone the repository and run `make` inside the directory:
+Clone the repository, build the binary, and install it:
 
 ```sh
 git clone https://github.com/wordgen/cli.git
 cd cli
-make
+make && make install
 ```
 
-Then run `make install` with root privileges to install:
-
-```sh
-sudo make install
-```
+By default, the binary is installed to `$HOME/.local/bin`.
 
 To uninstall:
 
 ```sh
-sudo make uninstall
+make uninstall
 ```
 
 ## Usage
