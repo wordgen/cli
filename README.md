@@ -7,11 +7,11 @@ separator, number of words, and wordlist used.
 
 ### AUR
 
-You can use your preferred AUR helper, or manually clone and run `makepkg`, to
-install `wordgen` or `wordgen-bin`.
+There are three AUR packages available:
 
-[![wordgen][badge-url]][aur-url]
-[![wordgen-bin][badge-url-bin]][aur-url-bin]
+- [![badge-url]][aur-url]: Download a versioned source archive and build locally.
+- [![bin-badge-url]][bin-aur-url]: Download a precompiled binary from the releases page.
+- [![git-badge-url]][git-aur-url]: Clone the repository and build the latest commit.
 
 ### Non-AUR
 
@@ -102,11 +102,14 @@ All files in this repository are licensed under the GNU Affero General Public
 License v3.0 or later - see the [LICENSE] file for details.
 
 <!-- links -->
-[wordgen/wordlists]: https://github.com/wordgen/wordlists/blob/main/README.md#available-wordlists
 [badge-url]: https://img.shields.io/aur/version/wordgen?label=wordgen&logo=arch-linux&style=plastic
 [aur-url]: https://aur.archlinux.org/packages/wordgen
-[badge-url-bin]: https://img.shields.io/aur/version/wordgen-bin?label=wordgen-bin&logo=arch-linux&style=plastic
-[aur-url-bin]: https://aur.archlinux.org/packages/wordgen-bin
+[bin-badge-url]: https://img.shields.io/aur/version/wordgen-bin?label=wordgen-bin&logo=arch-linux&style=plastic
+[bin-aur-url]: https://aur.archlinux.org/packages/wordgen-bin
+[git-badge-url]: https://img.shields.io/aur/version/wordgen-git?label=wordgen-git&logo=arch-linux&style=plastic
+[git-aur-url]: https://aur.archlinux.org/packages/wordgen-git
+
 [release]: https://github.com/wordgen/cli/releases/latest
+[wordgen/wordlists]: https://github.com/wordgen/wordlists/blob/main/README.md#available-wordlists
 [Conventional Commits]: https://conventionalcommits.org
 [LICENSE]: LICENSE
