@@ -2,13 +2,14 @@ PREFIX ?= /usr/local
 BINDIR ?= $(PREFIX)/bin
 SHAREDIR ?= $(PREFIX)/share
 BIN ?= wordgen
+BUILD_VERSION := $(shell git describe --tags --always --dirty 2>/dev/null || cat VERSION)
 
 .SILENT:
 
 .PHONY: build run install uninstall clean
 
 build:
-	go build -o ./bin/$(BIN) ./cmd/wordgen
+	go build -o ./bin/$(BIN) -ldflags="-X main.version=$(BUILD_VERSION)" ./cmd/wordgen
 
 run: build
 	./bin/$(BIN)

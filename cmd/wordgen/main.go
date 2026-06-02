@@ -28,9 +28,9 @@ import (
 	"github.com/wordgen/wordlists"
 )
 
-const (
-	version = "v0.5.1"
-	usage   = `Usage: wordgen [options]
+var version = "dev"
+
+const usage = `Usage: wordgen [options]
 
 Options:
   -c, --case STRING         Specify the case of the words (upper, title, lower)
@@ -48,7 +48,6 @@ Wordlists:
   effShort2    namesMale
 
   effLarge is the default wordlist`
-)
 
 type config struct {
 	wordCase            string
