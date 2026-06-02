@@ -10,3 +10,14 @@ repos:
       - id: go-vet-mod
       - id: go-staticcheck-mod
       - id: go-sec-mod
+
+  - repo: https://github.com/koalaman/shellcheck-precommit
+    rev: v0.11.0
+    hooks:
+      - id: shellcheck
+
+  - repo: https://github.com/scop/pre-commit-shfmt
+    rev: v3.13.1-1
+    hooks:
+      - id: shfmt
+        args: [-l, -w]
